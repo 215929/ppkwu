@@ -8,7 +8,6 @@ def check_for_lowercase(string_to_check):
         return char.islower()
 
 
-
 def check_for_uppercase(string_to_check):
     for char in string_to_check:
         return char.isupper()
@@ -24,7 +23,7 @@ def check_for_special_characters(string_to_check):
         return char.isalnum()
 
 
-@app.route('/<string_to_check>')
+@app.route('/stringAPI/<string_to_check>')
 def hello_world(string_to_check):
     return {
         "lowercase": check_for_lowercase(string_to_check),
