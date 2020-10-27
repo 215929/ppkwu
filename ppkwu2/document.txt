@@ -1,5 +1,5 @@
 Ogólny opis:
-API przetwarza danego stringa i zwraca plik JSON zawierający informacje o nim (czy zawiera odpowiednio małe litery, wielkie litery, liczbu i znaki specjalne).
+API przetwarza danego stringa i zwraca plik JSON zawierający informacje o nim (czy zawiera odpowiednio małe litery, wielkie litery, liczby i znaki specjalne).
 
 Wywołanie:
 /stringAPI/[param]
