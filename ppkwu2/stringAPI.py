@@ -33,9 +33,12 @@ def check_for_special_characters(string_to_check):
 
 @app.route('/<string_to_check>')
 def hello_world(string_to_check):
-    if check_for_special_characters(string_to_check):
-        return "true"
-    return "false"
+    return {
+        "lowercase": check_for_lowercase(string_to_check),
+        "uppercase": check_for_uppercase(string_to_check),
+        "numbers": check_for_numbers(string_to_check),
+        "special characters": check_for_special_characters(string_to_check)
+    }
 
 
 app.run()
