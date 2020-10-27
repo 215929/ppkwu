@@ -1,0 +1,33 @@
+Ogólny opis:
+API przetwarza danego stringa i zwraca plik JSON zawierający informacje o nim (czy zawiera odpowiednio małe litery, wielkie litery, liczbu i znaki specjalne).
+
+Wywołanie:
+/stringAPI/[param]
+gdzie [param] jest stringiem, który ma być przetworzony.
+
+Wartość zwracana:
+{
+    "lowercase": [boolean value],
+    "uppercase": [boolean value],
+    "numbers": [boolean value],
+    "special characters": [boolean value]
+}
+gdzie [boolean value] może przybierać wartość "true" albo "false".
+
+Przykłady uzycia:
+
+wywołanie: /stringAPI/helloworld
+wartość zwracana:
+{"lowercase":true,"numbers":false,"special characters":false,"uppercase":false}
+
+wywołanie: /stringAPI/helloWorld
+wartość zwracana:
+{"lowercase":true,"numbers":false,"special characters":false,"uppercase":true}
+
+wywołanie: /stringAPI/helloWorld1
+wartość zwracana:
+{"lowercase":true,"numbers":true,"special characters":false,"uppercase":true}
+
+wywołanie: /stringAPI/helloWorld1;
+wartość zwracana:
+{"lowercase":true,"numbers":true,"special characters":true,"uppercase":true}
