@@ -5,30 +5,23 @@ app = Flask(__name__)
 
 def check_for_lowercase(string_to_check):
     for char in string_to_check:
-        if char.islower():
-            return True
-    return False
+        return char.islower()
+
 
 
 def check_for_uppercase(string_to_check):
     for char in string_to_check:
-        if char.isupper():
-            return True
-    return False
+        return char.isupper()
 
 
 def check_for_numbers(string_to_check):
     for char in string_to_check:
-        if char.isnumeric():
-            return True
-    return False
+        return char.isnumeric()
 
 
 def check_for_special_characters(string_to_check):
     for char in string_to_check:
-        if not char.isalnum():
-            return True
-    return False
+        return char.isalnum()
 
 
 @app.route('/<string_to_check>')
