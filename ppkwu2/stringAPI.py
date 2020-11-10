@@ -23,6 +23,7 @@ def check_for_numbers(string_to_check):
     else:
         return False
 
+
 def check_for_special_characters(string_to_check):
     if any(not letter.isalnum() for letter in string_to_check):
         return True
