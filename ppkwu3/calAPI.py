@@ -12,7 +12,6 @@ def hello():
     response = requests.get(
         "http://www.weeia.p.lodz.pl/pliki_strony_kontroler/kalendarz.php?rok=2020&miesiac=10&lang=1")
     events = dict()
-    event_list = []
 
     parsed_html = BeautifulSoup(response.text)
 
@@ -26,8 +25,6 @@ def hello():
     return_value = []
 
     for day in events:
-        #return_value.append(events[day][1])
-
         event = Event()
 
         event.add('summary', events[day][1])
