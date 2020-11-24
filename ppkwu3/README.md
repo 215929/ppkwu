@@ -7,9 +7,11 @@ calAPI is a simple and intuitive API for generating and downloading .ics files w
 
 The only endpoint of the API is:
 
-/calAPI/year=<year>/month=<month>
+'''
+/calAPI/year=`<year>`/month=`<month>`
+'''
 
-,where <year> and <month> should be replaced with desired year and month, respectively.
+,where `<year>` and `<month>` should be replaced with desired year and month, respectively.
 
 ## Usage examples 
 
