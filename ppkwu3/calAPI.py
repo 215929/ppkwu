@@ -31,7 +31,7 @@ def hello(month, year):
         cal.add_component(event)
 
     return Response((cal.to_ical()), mimetype="text/ics",
-                    headers={"Content-Disposition": "attachment;filename=test.ics"})
+                    headers={"Content-Disposition": "attachment;filename=calAPI.ics"})
 
 
 app.run()
