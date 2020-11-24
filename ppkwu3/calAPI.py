@@ -9,6 +9,12 @@ app = Flask(__name__)
 
 @app.route('/calAPI/year=<year>/month=<month>')
 def hello(month, year):
+    if (not month.isnumeric()) or (not year.isnumeric()):
+        return "Error: values are wrong"
+
+    if len(month) == 1:
+        month = "0" + month
+
     response = requests.get(
         "http://www.weeia.p.lodz.pl/pliki_strony_kontroler/kalendarz.php?rok=" + year + "&miesiac=" + month + "&lang=1")
     events = dict()
