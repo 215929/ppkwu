@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, send_file, Response
 import requests
 from bs4 import BeautifulSoup
 from icalendar import Calendar, Event
@@ -32,11 +32,7 @@ def hello():
 
         cal.add_component(event)
 
-    f = open('test.ics', 'wb')
-    f.write(cal.to_ical())
-    f.close()
-
-    return str(return_value)
+    return Response((cal.to_ical()), mimetype="text/plain", headers={"Content-Disposition": "attachment;filename=test.ics"})
 
 
 app.run()
