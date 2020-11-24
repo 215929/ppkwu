@@ -7,10 +7,10 @@ import datetime
 app = Flask(__name__)
 
 
-@app.route('/')
-def hello():
+@app.route('/calAPI/year=<year>/month=<month>')
+def hello(month, year):
     response = requests.get(
-        "http://www.weeia.p.lodz.pl/pliki_strony_kontroler/kalendarz.php?rok=2020&miesiac=10&lang=1")
+        "http://www.weeia.p.lodz.pl/pliki_strony_kontroler/kalendarz.php?rok=" + year + "&miesiac=" + month + "&lang=1")
     events = dict()
 
     parsed_html = BeautifulSoup(response.text)
@@ -22,17 +22,16 @@ def hello():
 
     cal = Calendar()
 
-    return_value = []
-
     for day in events:
         event = Event()
 
         event.add('summary', events[day][1])
-        event.add('dtstart', datetime.date(2020, 10, int(day)))
+        event.add('dtstart', datetime.date(int(year), int(month), int(day)))
 
         cal.add_component(event)
 
-    return Response((cal.to_ical()), mimetype="text/plain", headers={"Content-Disposition": "attachment;filename=test.ics"})
+    return Response((cal.to_ical()), mimetype="text/ics",
+                    headers={"Content-Disposition": "attachment;filename=test.ics"})
 
 
 app.run()
