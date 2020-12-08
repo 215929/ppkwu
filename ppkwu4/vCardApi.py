@@ -11,27 +11,34 @@ def vCardApi():
         "https://panoramafirm.pl/szukaj?k=Hydraulik&l=")
 
     parsed_html = BeautifulSoup(response.text)
-    return_value1 = []
 
-    for link in parsed_html.find_all('a', {"title": "Zobacz informacje szczegółowe o firmie"}):
-        return_value1.append(link.getText)
+    users = []
 
-    return_value2 = []
+    names = []
+    for link in parsed_html.find_all('a', {"class": "company-name"}):
+        names.append(link.text.strip())
 
+    addresses = []
     for div in parsed_html.find_all('div', {"class": "address"}):
-        return_value2.append(div.getText)
+        addresses.append(div.text.strip())
 
-    return_value3 = []
-
+    phones = []
     for link in parsed_html.find_all('a', {"class": "icon-telephone"}):
-        return_value3.append(link['title'])
+        phones.append(link['title'])
 
-    return_value4 = []
-
+    mails = []
     for link in parsed_html.find_all('a', {"class": "ajax-modal-link"}):
-        return_value4.append(link['data-company-email'])
+        mails.append(link['data-company-email'])
 
-    return str([return_value1, return_value2, return_value3, return_value4])
+    for i in range(len(names)):
+        users.append({
+            "name": names[i],
+            "address": addresses[i],
+            "phone": phones[i],
+            "mail": mails[i],
+        })
+
+    return str(users)
 
 
 app.run()
