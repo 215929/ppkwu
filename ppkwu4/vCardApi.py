@@ -1,6 +1,7 @@
 from flask import Flask, Response
 import requests
 from bs4 import BeautifulSoup
+import vobject
 
 app = Flask(__name__)
 
@@ -37,6 +38,10 @@ def vCardApi():
             "phone": phones[i],
             "mail": mails[i],
         })
+
+    v = vobject.vCard()
+    v.add('fn').value = "Jeffery Harris"
+    v.add('email').value = 'jeffrey@osafoundation.org'
 
     return str(users)
 
