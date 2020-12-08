@@ -39,11 +39,18 @@ def vCardApi():
             "mail": mails[i],
         })
 
-    v = vobject.vCard()
-    v.add('fn').value = "Jeffery Harris"
-    v.add('email').value = 'jeffrey@osafoundation.org'
+    vCards = []
+    for user in users:
+        v = vobject.vCard()
+        v.add('fn').value = user["name"]
+        v.add('address').value = user["address"]
+        v.add('tel').value = user["phone"]
+        v.add('email').value = user["mail"]
+        v = v.serialize()
+        print(v)
+        vCards.append(v)
 
-    return str(users)
+    return str(vCards)
 
 
 app.run()
