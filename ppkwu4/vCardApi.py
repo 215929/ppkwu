@@ -41,10 +41,10 @@ def generateVCard(user):
     return v
 
 
-@app.route('/')
-def vCardApi():
+@app.route('/profession=<profession>')
+def vCardApi(profession):
     response = requests.get(
-        "https://panoramafirm.pl/szukaj?k=Hydraulik&l=")
+        "https://panoramafirm.pl/szukaj?k=" + str(profession) + "&l=")
 
     parsed_html = BeautifulSoup(response.text)
 
