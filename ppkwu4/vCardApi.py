@@ -24,24 +24,18 @@ def generateRow(user):
     rowHTML += "<td>" + user["address"] + "</td>\n"
     rowHTML += "<td>" + user["phone"] + "</td>\n"
     rowHTML += "<td>" + user["mail"] + "</td>\n"
-    rowHTML += "<td>  <a href=\"https://www.w3schools.com\">Visit W3Schools</a>  </td>\n"
+    rowHTML += "<td>  <a href=\"/downloadVCard/name=" + user["name"]\
+               + "&&address=" + user["address"]\
+               + "&&phone=" + user["phone"]\
+               + "&&mail=" + user["mail"]\
+               + "\">wygeneruj vCard</td>\n"
 
     rowHTML += "</tr>\n"
 
     return rowHTML
 
 
-def generateVCard(user):
-    v = vobject.vCard()
-    v.add('fn').value = user["name"]
-    v.add('address').value = user["address"]
-    v.add('tel').value = user["phone"]
-    v.add('email').value = user["mail"]
-    v = v.serialize()
-    return v
-
-
-@app.route('/profession=<profession>')
+@app.route('/vCardApi/profession=<profession>')
 def vCardApi(profession):
     response = requests.get(
         "https://panoramafirm.pl/szukaj?k=" + str(profession) + "&l=")
@@ -74,11 +68,19 @@ def vCardApi(profession):
             "mail": mails[i],
         })
 
-    vCards = []
-    for user in users:
-        vCards.append(generateVCard(user))
-
     return generateTable(users)
 
+
+@app.route('/downloadVCard/name=<name>&&address=<address>&&phone=<phone>&&mail=<mail>')
+def downloadVCard(name, address, phone, mail):
+    v = vobject.vCard()
+    v.add('fn').value = name if name else "brak"
+    v.add('address').value = address if address else "brak"
+    v.add('tel').value = phone if phone else "brak"
+    v.add('email').value = mail if mail else "brak"
+    v = v.serialize()
+
+    return Response(v, mimetype="text/vcf",
+                    headers={"Content-Disposition": "attachment;filename=vcard.vcf"})
 
 app.run()
